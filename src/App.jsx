@@ -1,0 +1,71 @@
+import { useState } from "react";
+import { Sun } from "lucide-react";
+import Routs from "./Router/Routs";
+import { NotesContextProvider } from "./Context/NotesContext";
+import {
+  AddNoteBtn,
+  AddNoteForm,
+  Logo,
+  Navbar,
+  PriorityBar,
+  SearchBar,
+  ReviewWindow,
+} from "./Components";
+
+function App() {
+  const [toggleNoteForm, setToggleNoteForm] = useState(false);
+  const [toggleReviewWindow, setToggleReviewWindow] = useState(true);
+  const [notesData, setNotesData] = useState([]);
+  const [noteID, setNoteID] = useState(0);
+
+  // Delete Notes
+  const deleteNote = function (id, setArr) {
+    setArr((prev) => {
+      console.log(prev.filter((data) => data.id === id));
+      return [...prev.filter((data) => data.id !== id)];
+    });
+  };
+
+  // Context values
+  const val = {
+    noteID,
+    setNoteID,
+    setNotesData,
+    notesData,
+    deleteNote,
+    toggleReviewWindow,
+    setToggleReviewWindow,
+  };
+  return (
+    <NotesContextProvider value={val}>
+      <div className="grid grid-cols-5 grid-rows-8 h-screen font-roboto">
+        <Logo />
+        <Navbar />
+        <div className="col-span-4 row-start-1 col-start-2 flex justify-between items-center px-5">
+          <SearchBar />
+        </div>
+        <main className="bg-gray-100 col-span-4 row-span-7 py-5 px-10 flex flex-col gap-2">
+          <div className="flex justify-between px-5">
+            <PriorityBar />
+            <AddNoteBtn setToggleNoteForm={setToggleNoteForm} />
+          </div>
+          <Routs />
+        </main>
+        <AddNoteForm
+          toggleNoteForm={toggleNoteForm}
+          setToggleNoteForm={setToggleNoteForm}
+          setNotesData={setNotesData}
+        />
+        <ReviewWindow
+          noteID={noteID}
+          notesData={notesData}
+          setNotesData={setNotesData}
+          setToggleReviewWindow={setToggleReviewWindow}
+          toggleReviewWindow={toggleReviewWindow}
+        />
+      </div>
+    </NotesContextProvider>
+  );
+}
+
+export default App;

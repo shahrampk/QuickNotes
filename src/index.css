@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+  --breakpoint-3xl: 1920px;
+}
+/* Sidebar NavLink Tip */
+.tip::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: -15px;
+  transform: rotate(45deg);
+  border-top-right-radius: 20px;
+  background-color: #6741d9;
+}
+.tip::before {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
