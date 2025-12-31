@@ -1,104 +1,104 @@
 import { Edit, Minimize, SaveIcon } from "lucide-react";
-import useNotesContext from "../Context/NotesContext";
 import Priority from "./Priority";
 import { useEffect, useRef, useState } from "react";
 
 function ReviewWindow({
-  noteID = 1767084567583,
-  notesData,
+  noteID,
+  notesData = [],
   setNotesData,
   setToggleReviewWindow,
   toggleReviewWindow,
 }) {
-  const data = notesData.find((noteData) => noteData.id === noteID);
-
+  // 🔒 HOOKS ALWAYS FIRST
   const [edit, setEdit] = useState(false);
   const [val, setVal] = useState("");
-  const descriptionRef = useRef(null);
-  useEffect(() => {
-    if (edit && descriptionRef.current) {
-      const textarea = descriptionRef.current;
-      textarea.focus();
 
-      const length = textarea.value.length;
-      textarea.setSelectionRange(length, length); // 👈 cursor end par
-    }
+  const descriptionRef = useRef(null);
+
+  // 🔒 SAFE FIND
+  const data = notesData.find((n) => n.id === noteID);
+
+  // 🔒 sync value safely
+  useEffect(() => {
+    if (!data) return;
+    setVal(data.description ?? "");
+    setEdit(false);
+  }, [data?.id]);
+
+  // 🔒 cursor
+  useEffect(() => {
+    if (!edit || !descriptionRef.current) return;
+    const textarea = descriptionRef.current;
+    textarea.focus();
+    textarea.setSelectionRange(textarea.value.length, textarea.value.length);
   }, [edit]);
-  const updateVal = function () {
+
+  const updateVal = () => {
+    if (!data) return;
     setNotesData((prev) =>
-      prev.map((noteData) =>
-        noteData.id === noteID ? { ...noteData, description: val } : noteData
+      prev.map((note) =>
+        note.id === data.id ? { ...note, description: val } : note
       )
     );
+    setEdit(false);
   };
 
-  function hide() {
+  const closeModal = () => {
     setEdit(false);
+    setVal(data?.description ?? "");
     setToggleReviewWindow(true);
-    setVal(data?.description);
-  }
+  };
 
-  function hideModel(e) {
+  const handleBackdrop = (e) => {
     if (e.target.closest(".review-model")) return;
-    hide();
-  }
+    closeModal();
+  };
+
+  // 🔒 CONDITIONAL JSX (NOT conditional hooks)
+  if (!data) return null;
+
   return (
     <div
-      onClick={hideModel}
+      onClick={handleBackdrop}
       className={`${
         !toggleReviewWindow ? "visible opacity-100" : "invisible opacity-0"
-      } flex justify-center items-center fixed top-0 right-0 h-full w-full overflow-hidden bg-black/20 backdrop-blur-sm z-50 transition-all duration-300`}
+      } fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-50 transition-all duration-300`}
     >
-      <div className="review-model h-4/5 w-5/6 md:w-3/5 3xl:w-3/4 3xl:h-4/5 bg-white shadow-2xl shadow-black/50 rounded-lg p-6 flex gap-5 flex-col ">
+      <div className="review-model h-4/5 w-5/6 md:w-3/5 bg-white rounded-lg shadow-2xl p-6 flex flex-col gap-5">
         <div className="flex justify-between items-center">
           <div className="flex gap-3">
-            <Priority val={data?.category} scale={true} />
-            <Priority val={data?.priority} scale={true} />
+            <Priority val={data.category ?? ""} scale />
+            <Priority val={data.priority ?? ""} scale />
           </div>
+
           <div className="flex gap-6">
             {edit ? (
-              <SaveIcon
-                className="cursor-pointer"
-                onClick={() => {
-                  updateVal();
-                  setEdit(false);
-                }}
-              />
+              <SaveIcon className="cursor-pointer" onClick={updateVal} />
             ) : (
-              <Edit
-                className="cursor-pointer"
-                onClick={() => {
-                  setEdit(true);
-                  setVal(data?.description);
-                }}
-              />
+              <Edit className="cursor-pointer" onClick={() => setEdit(true)} />
             )}
-            <Minimize className="cursor-pointer" onClick={hide} />
+            <Minimize className="cursor-pointer" onClick={closeModal} />
           </div>
         </div>
-        <div className="h-4/5">
-          <h2 className="text-3xl 3xl:text-5xl mb-2 font-semibold leading-normal ">
-            {data?.title}
-          </h2>
+
+        <div className="flex-1">
+          <h2 className="text-3xl mb-2 font-semibold">{data.title ?? ""}</h2>
+
           {edit ? (
             <textarea
-              className="3xl:text-2xl resize-none w-full h-4/5 outline-none text-gray-700"
               ref={descriptionRef}
-              name="description"
-              id="description"
-              defaultValue={data?.description}
               value={val}
               onChange={(e) => setVal(e.target.value)}
+              className="w-full h-full resize-none outline-none text-gray-700"
             />
           ) : (
-            <p className="3xl:text-2xl resize-none w-full h-4/5 outline-none overflow-y-scroll text-gray-700 scrollbar-hidden">
-              {data?.description}
+            <p className="w-full h-full overflow-y-auto text-gray-700">
+              {data.description ?? ""}
             </p>
           )}
         </div>
-        <div className="flex justify-end">
-          <p className="text-gray-400">{data?.date}</p>
-        </div>
+
+        <div className="text-right text-gray-400">{data.date ?? ""}</div>
       </div>
     </div>
   );
