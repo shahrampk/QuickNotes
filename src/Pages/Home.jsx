@@ -10,15 +10,14 @@ function Home() {
     920: 2,
     700: 1,
   };
-  const { notesData } = useNotesContext();
-  console.log(notesData);
+  const { filteredArr } = useNotesContext();
   return (
     <div className="h-full overflow-y-scroll scrollbar-hidden px-3">
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="flex w-auto h-fit"
       >
-        {notesData.map((note, i) => (
+        {filteredArr.map((note, i) => (
           <Note key={i} noteDate={note} />
         ))}
       </Masonry>

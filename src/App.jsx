@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import Routs from "./Router/Routs";
 import { NotesContextProvider } from "./Context/NotesContext";
 import {
@@ -11,23 +10,36 @@ import {
   SearchBar,
   ReviewWindow,
 } from "./Components";
+import EditForm from "./Components/EditForm";
 
 function App() {
+  const [notesData, setNotesData] = useState([]);
+  const [filteredArr, setFilteredArr] = useState([]);
   const [toggleNoteForm, setToggleNoteForm] = useState(false);
   const [toggleReviewWindow, setToggleReviewWindow] = useState(true);
-  const [notesData, setNotesData] = useState([]);
   const [noteID, setNoteID] = useState(0);
+  const [toggleEditForm, setToggleEditForm] = useState(false);
+  const [selectedPriority, setSelectedPriority] = useState("All");
+  useEffect(() => {
+    const filteredNotes =
+      selectedPriority === "All"
+        ? notesData
+        : notesData.filter((note) => note.priority === selectedPriority);
+    setFilteredArr([...filteredNotes]);
+  }, [notesData, selectedPriority]);
 
   // Delete Notes
   const deleteNote = function (id, setArr) {
     setArr((prev) => {
-      console.log(prev.filter((data) => data.id === id));
       return [...prev.filter((data) => data.id !== id)];
     });
   };
 
   // Context values
   const val = {
+    selectedPriority,
+    setSelectedPriority,
+    filteredArr,
     noteID,
     setNoteID,
     setNotesData,
@@ -35,6 +47,7 @@ function App() {
     deleteNote,
     toggleReviewWindow,
     setToggleReviewWindow,
+    setToggleEditForm,
   };
   return (
     <NotesContextProvider value={val}>
@@ -64,6 +77,12 @@ function App() {
           toggleReviewWindow={toggleReviewWindow}
         />
       </div>
+      <EditForm
+        toggleEditForm={toggleEditForm}
+        setToggleEditForm={setToggleEditForm}
+        noteId={noteID}
+        setNotesData={setNotesData}
+      />
     </NotesContextProvider>
   );
 }
