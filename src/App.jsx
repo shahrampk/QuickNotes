@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Sun } from "lucide-react";
 import Routs from "./Router/Routs";
 import { NotesContextProvider } from "./Context/NotesContext";
 import {
@@ -11,13 +10,14 @@ import {
   SearchBar,
   ReviewWindow,
 } from "./Components";
+import EditForm from "./Components/EditForm";
 
 function App() {
+  const [notesData, setNotesData] = useState([]);
   const [toggleNoteForm, setToggleNoteForm] = useState(false);
   const [toggleReviewWindow, setToggleReviewWindow] = useState(true);
-  const [notesData, setNotesData] = useState([]);
   const [noteID, setNoteID] = useState(0);
-
+  const [toggleEditForm, setToggleEditForm] = useState(false);
   // Delete Notes
   const deleteNote = function (id, setArr) {
     setArr((prev) => {
@@ -35,6 +35,7 @@ function App() {
     deleteNote,
     toggleReviewWindow,
     setToggleReviewWindow,
+    setToggleEditForm,
   };
   return (
     <NotesContextProvider value={val}>
@@ -64,6 +65,10 @@ function App() {
           toggleReviewWindow={toggleReviewWindow}
         />
       </div>
+      <EditForm
+        toggleEditForm={toggleEditForm}
+        setToggleEditForm={setToggleEditForm}
+      />
     </NotesContextProvider>
   );
 }

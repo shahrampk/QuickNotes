@@ -1,10 +1,16 @@
 import { Delete, Edit, Maximize } from "lucide-react";
 import useNotesContext from "../Context/NotesContext";
 import Priority from "./Priority";
+import useFindNotesData from "../Hooks/useFindNotesData";
 
 function Note({ noteDate }) {
-  const { deleteNote, setNotesData, setToggleReviewWindow, setNoteID } =
-    useNotesContext();
+  const {
+    deleteNote,
+    setNotesData,
+    setToggleReviewWindow,
+    setNoteID,
+    setToggleEditForm,
+  } = useNotesContext();
   return (
     <div
       id={noteDate.id}
@@ -21,7 +27,11 @@ function Note({ noteDate }) {
               setToggleReviewWindow(false);
             }}
           />
-          <Edit size="18" className="cursor-pointer" />
+          <Edit
+            size="18"
+            className="cursor-pointer"
+            onClick={() => setToggleEditForm(true)}
+          />
           <Delete
             size="18"
             className="cursor-pointer"
