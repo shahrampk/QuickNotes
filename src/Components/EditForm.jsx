@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useFindNotesData from "../Hooks/useFindNotesData";
 
-function EditForm({ toggleEditForm = false, setToggleEditForm }) {
-  const data = useFindNotesData(1767180461254);
-  console.log(data);
-  const [editData, setEditData] = useState({
-    id: data?.id,
-    title: data?.title,
-    category: data?.category,
-    priority: data?.priority,
-    date: Date.now(),
-    description: data?.description,
-  });
+function EditForm({
+  toggleEditForm = false,
+  setToggleEditForm,
+  noteId,
+  setNotesData,
+}) {
+  const data = useFindNotesData(noteId);
+  const [editData, setEditData] = useState();
+  useEffect(() => {
+    setEditData(data);
+  }, [data]);
+
   function hideEditForm(e) {
     if (e.target.closest(".edit-form")) return;
+    setToggleEditForm(false);
+  }
+  function updateNoteData(e) {
+    e.preventDefault();
+    setNotesData((prev) =>
+      prev.map((data) => (data.id === editData.id ? (data = editData) : data))
+    );
     setToggleEditForm(false);
   }
   return (
@@ -25,16 +33,19 @@ function EditForm({ toggleEditForm = false, setToggleEditForm }) {
     >
       <div className="edit-form bg-white p-5 rounded-lg flex flex-col items-center gap-4 w-130 shadow-2xl shadow-black/70">
         <h2 className="text-2xl font-semibold">Edit Note</h2>
-        <form className="grid grid-cols-2 gap-5 w-full">
+        <form
+          onSubmit={updateNoteData}
+          className="grid grid-cols-2 gap-5 w-full"
+        >
           <div className="col-span-full">
             <input
-              value={editData.title}
+              value={editData?.title}
               type="text"
               placeholder="Title"
               className="bg-gray-200 w-full px-3 py-3 outline-none rounded"
               required
               onChange={(e) => {
-                setNoteData((prev) => {
+                setEditData((prev) => {
                   return { ...prev, title: e.target.value };
                 });
               }}
@@ -43,11 +54,11 @@ function EditForm({ toggleEditForm = false, setToggleEditForm }) {
           <div>
             <select
               onChange={(e) =>
-                setNoteData((prev) => {
+                setEditData((prev) => {
                   return { ...prev, category: e.target.value };
                 })
               }
-              value={editData.category}
+              value={editData?.category}
               name="category"
               id="category"
               className="bg-gray-200 p-3 w-full outline-none rounded"
@@ -65,12 +76,12 @@ function EditForm({ toggleEditForm = false, setToggleEditForm }) {
             <select
               required
               onChange={(e) =>
-                setNoteData((prev) => {
+                setEditData((prev) => {
                   return { ...prev, priority: e.target.value };
                 })
               }
               name="priority"
-              value={editData.priority}
+              value={editData?.priority}
               id="priority"
               className="bg-gray-200 p-3 w-full outline-none rounded"
             >
@@ -85,12 +96,12 @@ function EditForm({ toggleEditForm = false, setToggleEditForm }) {
           <div className="col-span-2">
             <textarea
               onChange={(e) =>
-                setNoteData((prev) => {
+                setEditData((prev) => {
                   return { ...prev, description: e.target.value };
                 })
               }
               name="description"
-              value={editData.description}
+              value={editData?.description}
               id="description"
               placeholder="Note Description"
               cols="30"

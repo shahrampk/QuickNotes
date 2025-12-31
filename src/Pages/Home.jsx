@@ -11,7 +11,6 @@ function Home() {
     700: 1,
   };
   const { notesData } = useNotesContext();
-  console.log(notesData);
   return (
     <div className="h-full overflow-y-scroll scrollbar-hidden px-3">
       <Masonry

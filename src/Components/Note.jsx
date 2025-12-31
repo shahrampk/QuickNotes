@@ -30,7 +30,10 @@ function Note({ noteDate }) {
           <Edit
             size="18"
             className="cursor-pointer"
-            onClick={() => setToggleEditForm(true)}
+            onClick={() => {
+              setToggleEditForm(true);
+              setNoteID(noteDate.id);
+            }}
           />
           <Delete
             size="18"

@@ -21,7 +21,6 @@ function App() {
   // Delete Notes
   const deleteNote = function (id, setArr) {
     setArr((prev) => {
-      console.log(prev.filter((data) => data.id === id));
       return [...prev.filter((data) => data.id !== id)];
     });
   };
@@ -68,6 +67,8 @@ function App() {
       <EditForm
         toggleEditForm={toggleEditForm}
         setToggleEditForm={setToggleEditForm}
+        noteId={noteID}
+        setNotesData={setNotesData}
       />
     </NotesContextProvider>
   );
