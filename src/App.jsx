@@ -11,6 +11,8 @@ import {
   ReviewWindow,
 } from "./Components";
 import EditForm from "./Components/EditForm";
+import CategoriesBar from "./Components/CategoriesBar";
+import { Home } from "./Pages";
 
 function App() {
   const [notesData, setNotesData] = useState([]);
@@ -20,6 +22,7 @@ function App() {
   const [noteID, setNoteID] = useState(0);
   const [toggleEditForm, setToggleEditForm] = useState(false);
   const [selectedPriority, setSelectedPriority] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   useEffect(() => {
     const filteredNotes =
       selectedPriority === "All"
@@ -27,6 +30,16 @@ function App() {
         : notesData.filter((note) => note.priority === selectedPriority);
     setFilteredArr([...filteredNotes]);
   }, [notesData, selectedPriority]);
+  useEffect(() => {
+    console.log(selectedCategory);
+    console.log("All");
+    const filteredNotes =
+      selectedCategory === "All"
+        ? notesData
+        : notesData.filter((note) => note.category === selectedCategory);
+    console.log(filteredNotes);
+    setFilteredArr([...filteredNotes]);
+  }, [notesData, selectedCategory]);
 
   // Delete Notes
   const deleteNote = function (id, setArr) {
@@ -38,6 +51,8 @@ function App() {
   // Context values
   const val = {
     selectedPriority,
+    setSelectedCategory,
+    selectedCategory,
     setSelectedPriority,
     filteredArr,
     noteID,
@@ -53,7 +68,7 @@ function App() {
     <NotesContextProvider value={val}>
       <div className="grid grid-cols-5 grid-rows-8 h-screen font-roboto">
         <Logo />
-        <Navbar />
+        <CategoriesBar />
         <div className="col-span-4 row-start-1 col-start-2 flex justify-between items-center px-5">
           <SearchBar />
         </div>
@@ -62,7 +77,7 @@ function App() {
             <PriorityBar />
             <AddNoteBtn setToggleNoteForm={setToggleNoteForm} />
           </div>
-          <Routs />
+          <Home />
         </main>
         <AddNoteForm
           toggleNoteForm={toggleNoteForm}

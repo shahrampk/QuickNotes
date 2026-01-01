@@ -1,7 +1,6 @@
 import { Delete, Edit, Maximize } from "lucide-react";
 import useNotesContext from "../Context/NotesContext";
 import Priority from "./Priority";
-import useFindNotesData from "../Hooks/useFindNotesData";
 
 function Note({ noteDate }) {
   const {
