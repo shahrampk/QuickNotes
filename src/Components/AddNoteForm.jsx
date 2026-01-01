@@ -29,7 +29,11 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
         toggleNoteForm ? "visible opacity-100" : "invisible opacity-0"
       } bg-black/20 flex backdrop-blur-sm fixed top-0 right-0 h-full transition-all duration-300 w-full z-50 justify-center items-center`}
     >
-      <div className="form bg-white p-5 rounded-lg flex flex-col items-center gap-4 w-130 shadow-2xl shadow-black/70">
+      <div
+        className={`form bg-white p-5  rounded-lg flex flex-col items-center gap-4 w-130 shadow-2xl shadow-black/70  transition-all duration-300 ${
+          toggleNoteForm ? "scale-100 rotate-0" : "scale-0 rotate-180"
+        } `}
+      >
         <h2 className="text-2xl font-semibold">Add New Note</h2>
         <form onSubmit={submitForm} className="grid grid-cols-2 gap-5 w-full">
           <div className="col-span-full">
@@ -64,7 +68,7 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
               </option>
               <option value="Daily">Daily</option>
               <option value="Personal">Personal</option>
-              <option value="Work">Work</option>
+              <option value="Business">Business</option>
             </select>
           </div>
           <div>
