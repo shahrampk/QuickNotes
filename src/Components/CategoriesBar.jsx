@@ -11,9 +11,9 @@ function CategoriesBar() {
           selectedCategory === "All"
             ? "bg-[#6741d9] text-white tip"
             : "hover:bg-[#845ef7] hover:text-white"
-        } text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
+        } cursor-pointer text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
       >
-        <LayoutGrid /> All
+        <LayoutGrid /> <span className="hidden md:block">All</span>
       </button>
       <button
         onClick={(e) => setSelectedCategory("Daily")}
@@ -21,9 +21,9 @@ function CategoriesBar() {
           selectedCategory === "Daily"
             ? "bg-[#6741d9] text-white tip"
             : "hover:bg-[#845ef7] hover:text-white"
-        } text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
+        } cursor-pointer text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
       >
-        <Calendar /> Daily
+        <Calendar /> <span className="hidden md:block">Daily</span>
       </button>
       <button
         onClick={(e) => setSelectedCategory("Personal")}
@@ -31,9 +31,9 @@ function CategoriesBar() {
           selectedCategory === "Personal"
             ? "bg-[#6741d9] text-white tip"
             : "hover:bg-[#845ef7] hover:text-white"
-        } text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
+        } cursor-pointer text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
       >
-        <User /> Personal
+        <User /> <span className="hidden md:block">Personal</span>
       </button>
       <button
         onClick={(e) => setSelectedCategory("Business")}
@@ -41,9 +41,9 @@ function CategoriesBar() {
           selectedCategory === "Business"
             ? "bg-[#6741d9] text-white tip"
             : "hover:bg-[#845ef7] hover:text-white"
-        } text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
+        } cursor-pointer text-gray-300 flex gap-3 text-lg items-center relative px-4 py-3 z-10 overflow-y-clip hover:text-white`}
       >
-        <BriefcaseBusiness /> Business
+        <BriefcaseBusiness /> <span className="hidden md:block">Business</span>
       </button>
     </div>
   );

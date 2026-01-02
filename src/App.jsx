@@ -29,13 +29,10 @@ function App() {
     setFilteredArr([...filteredNotes]);
   }, [notesData, selectedPriority]);
   useEffect(() => {
-    console.log(selectedCategory);
-    console.log("All");
     const filteredNotes =
       selectedCategory === "All"
         ? notesData
         : notesData.filter((note) => note.category === selectedCategory);
-    console.log(filteredNotes);
     setFilteredArr([...filteredNotes]);
   }, [notesData, selectedCategory]);
 
@@ -48,6 +45,7 @@ function App() {
 
   // Context values
   const val = {
+    setFilteredArr,
     selectedPriority,
     setSelectedCategory,
     selectedCategory,
@@ -70,7 +68,7 @@ function App() {
         <div className="col-span-4 row-start-1 col-start-2 flex justify-between items-center px-5">
           <SearchBar />
         </div>
-        <main className="bg-gray-100 col-span-4 row-span-7 py-5 px-10 flex flex-col gap-2">
+        <main className="bg-gray-100 col-span-4 row-span-7 py-5 px-4 md:px-10 flex flex-col gap-2">
           <div className="flex justify-between px-5">
             <PriorityBar />
             <AddNoteBtn setToggleNoteForm={setToggleNoteForm} />

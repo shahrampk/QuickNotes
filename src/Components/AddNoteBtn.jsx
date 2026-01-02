@@ -10,7 +10,7 @@ function AddNoteBtn({ setToggleNoteForm }) {
       >
         <PlusCircle />
       </button>
-      Add new Note
+      <span className="hidden md:block">Add new Note</span>
     </div>
   );
 }

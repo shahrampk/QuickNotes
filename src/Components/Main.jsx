@@ -7,8 +7,8 @@ import { StickyNote } from "lucide-react";
 function Home() {
   const breakpointColumnsObj = {
     default: 4,
-    1200: 3,
-    920: 2,
+    1300: 3,
+    1000: 2,
     700: 1,
   };
   const { filteredArr } = useNotesContext();
