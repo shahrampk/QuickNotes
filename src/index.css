@@ -4,6 +4,8 @@
 @theme {
   --font-roboto: "Roboto", sans-serif;
   --breakpoint-3xl: 1920px;
+  --color-primary: #845ef7;
+  --color-primary-light: #6741d9;
 }
 /* Sidebar NavLink Tip */
 .tip::after {

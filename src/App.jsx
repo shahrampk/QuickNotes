@@ -11,6 +11,7 @@ import {
 import EditForm from "./Components/EditForm";
 import CategoriesBar from "./Components/CategoriesBar";
 import Main from "./Components/Main";
+import PriorityBarMobile from "./Components/PriorityBarMobile";
 
 function App() {
   const [notesData, setNotesData] = useState([]);
@@ -62,18 +63,24 @@ function App() {
   };
   return (
     <NotesContextProvider value={val}>
-      <div className="grid grid-cols-5 grid-rows-8 h-screen font-roboto">
-        <Logo />
-        <CategoriesBar />
-        <div className="col-span-4 row-start-1 col-start-2 flex justify-between items-center px-5">
-          <SearchBar />
+      <div className="hi flex font-roboto">
+        <div className="flex flex-col">
+          <Logo />
+          <CategoriesBar />
         </div>
-        <main className="bg-gray-100 col-span-4 row-span-7 py-5 px-4 md:px-10 flex flex-col gap-2">
-          <div className="flex justify-between px-5">
-            <PriorityBar />
-            <AddNoteBtn setToggleNoteForm={setToggleNoteForm} />
+        {/* <div className="flex justify-between items-center px-5">
+          <SearchBar />
+        </div> */}
+        <main className="flex flex-col min-h-screen gap-2 w-full">
+          <SearchBar />
+          <div className="bg-gray-100 py-5 px-4 md:px-10 flex flex-col gap-3 h-full">
+            <div className="flex justify-between px-5">
+              <PriorityBarMobile />
+              <PriorityBar />
+              <AddNoteBtn setToggleNoteForm={setToggleNoteForm} />
+            </div>
+            <Main />
           </div>
-          <Main />
         </main>
         <AddNoteForm
           toggleNoteForm={toggleNoteForm}

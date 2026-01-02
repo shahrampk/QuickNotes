@@ -25,8 +25,8 @@ function Home() {
         </Masonry>
       ) : (
         <div className="flex flex-col items-center justify-center h-full opacity-50">
-          <StickyNote strokeWidth={1} size={150} />
-          <p className="text-2xl font-medium">No Notes Available</p>
+          <StickyNote strokeWidth={1} className="size-20 lg:size-40" />
+          <p className="text-base lg:text-xl font-medium">No Notes Available</p>
         </div>
       )}
     </div>
