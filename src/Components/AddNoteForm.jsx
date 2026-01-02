@@ -3,12 +3,11 @@ import React, { useState } from "react";
 function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
   const defaultValue = {
     id: Date.now(),
-    title: "QuickNotes",
+    title: "",
     category: "",
     priority: "",
-    description:
-      "This is a QuickNote for my daily tasks. These are some those task that I have to do Daily (Most Important).",
-    date: new Date().toLocaleDateString(),
+    description: "",
+    date: new Date().toLocaleDateString("en-PK"),
   };
   const [noteData, setNoteData] = useState(defaultValue);
   const hideForm = function () {
@@ -31,7 +30,7 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
     >
       <div
         className={`form bg-white p-5  rounded-lg flex flex-col items-center gap-4 w-130 shadow-2xl shadow-black/70  transition-all duration-300 ${
-          toggleNoteForm ? "scale-100 rotate-0" : "scale-0 rotate-180"
+          toggleNoteForm ? "scale-100" : "scale-0"
         } `}
       >
         <h2 className="text-2xl font-semibold">Add New Note</h2>

@@ -3,7 +3,6 @@ import useNotesContext from "../Context/NotesContext";
 
 function CategoriesBar() {
   const { setSelectedCategory, selectedCategory } = useNotesContext();
-  console.log(selectedCategory);
   return (
     <div className="flex flex-col gap-4 bg-[#845ef7] row-span-8 pt-5">
       <button

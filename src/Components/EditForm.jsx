@@ -33,7 +33,7 @@ function EditForm({
     >
       <div
         className={`edit-form bg-white p-5  rounded-lg flex flex-col items-center gap-4 w-130 shadow-2xl shadow-black/70  transition-all duration-300 ${
-          toggleEditForm ? "scale-100 rotate-0" : "scale-0 rotate-180"
+          toggleEditForm ? "scale-100" : "scale-0"
         } `}
       >
         <h2 className="text-2xl font-semibold">Edit Note</h2>

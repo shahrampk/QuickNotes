@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import Routs from "./Router/Routs";
 import { NotesContextProvider } from "./Context/NotesContext";
 import {
   AddNoteBtn,
   AddNoteForm,
   Logo,
-  Navbar,
   PriorityBar,
   SearchBar,
   ReviewWindow,
 } from "./Components";
 import EditForm from "./Components/EditForm";
 import CategoriesBar from "./Components/CategoriesBar";
-import { Home } from "./Pages";
+import Main from "./Components/Main";
 
 function App() {
   const [notesData, setNotesData] = useState([]);
@@ -77,7 +75,7 @@ function App() {
             <PriorityBar />
             <AddNoteBtn setToggleNoteForm={setToggleNoteForm} />
           </div>
-          <Home />
+          <Main />
         </main>
         <AddNoteForm
           toggleNoteForm={toggleNoteForm}

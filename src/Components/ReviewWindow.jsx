@@ -66,7 +66,7 @@ function ReviewWindow({
     >
       <div
         className={` ${
-          !toggleReviewWindow ? "scale-100 rotate-0" : "scale-0 rotate-180"
+          !toggleReviewWindow ? "scale-100" : "scale-0"
         } review-model h-4/5 w-5/6 md:w-3/5 bg-white rounded-lg shadow-2xl p-6 flex flex-col gap-5 transition-all duration-200`}
       >
         <div className="flex justify-between items-center">
