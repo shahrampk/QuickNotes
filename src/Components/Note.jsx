@@ -13,7 +13,7 @@ function Note({ noteDate }) {
   return (
     <div
       id={noteDate.id}
-      className="bg-white rounded p-5 flex flex-col gap-3 m-2 mb-4 shadow-xl"
+      className="bg-white rounded p-3 md:p-5 flex flex-col gap-3 m-2 mb-4 shadow-xl"
     >
       <div className="flex justify-between ">
         <Priority val={noteDate.category} />

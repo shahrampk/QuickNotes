@@ -13,7 +13,7 @@ function Home() {
   };
   const { filteredArr } = useNotesContext();
   return (
-    <div className="h-full overflow-y-scroll scrollbar-hidden px-3">
+    <div className="h-full overflow-y-scroll scrollbar-hidden md:px-3">
       {filteredArr.length > 0 ? (
         <Masonry
           breakpointCols={breakpointColumnsObj}

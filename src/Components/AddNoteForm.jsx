@@ -30,18 +30,21 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
       } bg-black/20 flex backdrop-blur-sm fixed top-0 right-0 h-full transition-all duration-300 w-full z-50 justify-center items-center`}
     >
       <div
-        className={`form bg-white p-5  rounded-lg flex flex-col items-center gap-4 w-130 shadow-2xl shadow-black/70  transition-all duration-300 ${
+        className={`form bg-white p-5  rounded-lg flex flex-col items-center gap-4 w-4/5 md:w-125 shadow-2xl shadow-black/70  transition-all duration-300 ${
           toggleNoteForm ? "scale-100" : "scale-0"
         } `}
       >
         <h2 className="text-2xl font-semibold">Add New Note</h2>
-        <form onSubmit={submitForm} className="grid grid-cols-2 gap-5 w-full">
+        <form
+          onSubmit={submitForm}
+          className="grid grid-cols-2 gap-2 md:gap-5 w-full"
+        >
           <div className="col-span-full">
             <input
               value={noteData.title}
               type="text"
               placeholder="Title"
-              className="bg-gray-200 w-full px-3 py-3 outline-none rounded"
+              className="bg-gray-200 w-full px-3 py-3 outline-none rounded  col-span-full md:col-span-1"
               required
               onChange={(e) => {
                 setNoteData((prev) => {
@@ -50,7 +53,7 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
               }}
             />
           </div>
-          <div>
+          <div className="col-span-full md:col-span-1">
             <select
               onChange={(e) =>
                 setNoteData((prev) => {
@@ -71,7 +74,7 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
               <option value="Business">Business</option>
             </select>
           </div>
-          <div>
+          <div className="col-span-full md:col-span-1">
             <select
               required
               onChange={(e) =>
@@ -92,7 +95,7 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
               <option value="Low">Low</option>
             </select>
           </div>
-          <div className="col-span-2">
+          <div className="col-span-full ">
             <textarea
               onChange={(e) =>
                 setNoteData((prev) => {
@@ -104,12 +107,12 @@ function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
               id="description"
               placeholder="Note Description"
               cols="30"
-              rows="9"
+              rows="7"
               className="resize-none scrollbar-hidden outline-none w-full bg-gray-200 p-3 rounded"
               required
             ></textarea>
           </div>
-          <button className="bg-[#845ef7] text-white font-semibold px-6 py-2 col-span-full justify-self-center rounded cursor-pointer hover:bg-[#6741d9] transition-colors duration-200">
+          <button className="bg-primary text-white font-semibold px-6 py-2 col-span-full justify-self-center rounded cursor-pointer hover:bg-primary-light transition-colors duration-200">
             Add Note
           </button>
         </form>

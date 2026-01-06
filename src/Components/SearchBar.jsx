@@ -15,7 +15,7 @@ function SearchBar() {
     setFilteredArr([...filteredArr]);
   }, [filteredArr]);
   return (
-    <search className="px-2 lg:px-4 py-5 lg:py-6 text-lg flex items-center gap-3">
+    <search className="px-4 py-5 lg:py-6 text-lg flex items-center gap-3">
       <Search stroke="#4a5565" />
       <input
         value={query}
