@@ -114,7 +114,7 @@ function EditForm({
               required
             ></textarea>
           </div>
-          <button className="bg-[#845ef7] text-white font-semibold px-6 py-2 col-span-full justify-self-center rounded cursor-pointer hover:bg-[#6741d9] transition-colors duration-200">
+          <button className="bg-primary text-white font-semibold px-6 py-2 col-span-full justify-self-center rounded cursor-pointer hover:bg-primary-light transition-colors duration-200">
             Save Note
           </button>
         </form>

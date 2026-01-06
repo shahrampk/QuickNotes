@@ -3,11 +3,10 @@ import React, { useState } from "react";
 function AddNoteForm({ toggleNoteForm, setToggleNoteForm, setNotesData }) {
   const defaultValue = {
     id: Date.now(),
-    title: "QuickNotes",
-    category: "Daily",
-    priority: "High",
-    description:
-      "This is a QuickNote for my daily tasks. These are some those task that I have to do Daily (Most Important).",
+    title: "",
+    category: "",
+    priority: "",
+    description: "",
     date: new Date().toLocaleDateString("en-PK"),
   };
   const [noteData, setNoteData] = useState(defaultValue);
